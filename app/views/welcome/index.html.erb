@@ -2,8 +2,6 @@
 
 <p>Today's date: <%= date_br(Date.today) %></p>
 
-<ul>
-    <li>
-        <%= link_to "Cadastro de Moedas", coins_path%>
-    </li>
-</ul>
+<%= render "menu" %>
+
+<p>You are in the: <strong><%= rails_env %></strong></p>
