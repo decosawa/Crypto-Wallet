@@ -6,7 +6,11 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Coin.create!([
+require 'tty-spinner'
+
+spinner = TTY::Spinner.new("[:spinner] Registering cryptocurrency...", format: :dots)
+spinner.auto_spin
+coins = [
 
     {
 
@@ -30,5 +34,11 @@ Coin.create!([
 
     }
     
-])
-    
+]
+coins.each do |coin|
+
+    sleep(3)
+    Coin.find_or_create_by(coin)
+
+end
+spinner.success("(Task finished!)")
