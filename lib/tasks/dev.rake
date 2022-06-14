@@ -5,26 +5,26 @@ namespace :dev do
     
     if(Rails.env.development?)
 
-      show_spinner("Erasing database...", "Task finished! | 1/4" ) do
+      show_spinner("Erasing database...", "Task finished! | 1/5" ) do
 
         %x(rails db:drop)
 
       end
 
-      show_spinner("Creating database...", "Task finished! | 2/4" ) do
+      show_spinner("Creating database...", "Task finished! | 2/5" ) do
 
         %x(rails db:create)
 
       end
 
-      show_spinner("Migrating database...", "Task finished! | 3/4" ) do
+      show_spinner("Migrating database...", "Task finished! | 3/5" ) do
 
         %x(rails db:migrate)
 
       end
 
-
       %x(rails dev:add_cryptocurrency)
+      %x(rails dev:add_mining_type)
 
     else
 
@@ -37,7 +37,7 @@ namespace :dev do
   desc "Register the cryptocurrency"
   task add_cryptocurrency: :environment do
 
-    show_spinner("Registering cryptocurrency...", "Task finished!" ) do
+    show_spinner("Registering cryptocurrency...", "Task finished! | 4/5" ) do
 
       coins = [
 
@@ -74,6 +74,44 @@ namespace :dev do
 
     end
   
+  end
+
+  desc "Register the mining type"
+  task add_mining_type: :environment do
+
+    show_spinner("Registering mining type...", "Task finished! | 5/5" ) do
+
+      mining_types = [
+
+        {
+
+          description: "Proof of Work",
+          acronym: "PoW"
+
+        },
+        {
+
+          description: "Proof of Stake",
+          acronym: "PoS"
+
+        },
+        {
+
+          description: "Proof of Capacity",
+          acronym: "PoC"
+
+        }
+
+      ]
+
+      mining_types.each do |mining_type|
+
+        MiningType.find_or_create_by!(mining_type)
+
+      end
+
+    end
+
   end
 
   private
