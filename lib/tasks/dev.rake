@@ -23,8 +23,8 @@ namespace :dev do
 
       end
 
-      %x(rails dev:add_cryptocurrency)
       %x(rails dev:add_mining_type)
+      %x(rails dev:add_cryptocurrency)
 
     else
 
@@ -37,7 +37,7 @@ namespace :dev do
   desc "Register the cryptocurrency"
   task add_cryptocurrency: :environment do
 
-    show_spinner("Registering cryptocurrency...", "Task finished! | 4/5" ) do
+    show_spinner("Registering cryptocurrency...", "Task finished! | 5/5" ) do
 
       coins = [
 
@@ -45,21 +45,24 @@ namespace :dev do
 
             description: "Bitcoin", 
             acronym: "BTC", 
-            url_image: "https://imgs.jusbr.com/publications/images/bf89dddcc864eb9d0df14b480177f5eb"
+            url_image: "https://imgs.jusbr.com/publications/images/bf89dddcc864eb9d0df14b480177f5eb",
+            mining_type: MiningType.find_by(acronym: "PoW")
 
           }, 
           {
 
             description: "Ethereum", 
             acronym: "ETH", 
-            url_image: "https://styles.redditmedia.com/t5_2zf9m/styles/communityIcon_hebckbd64w811.png"
+            url_image: "https://styles.redditmedia.com/t5_2zf9m/styles/communityIcon_hebckbd64w811.png",
+            mining_type: MiningType.all.sample
 
           }, 
           {
 
             description: "Dash", 
             acronym: "DASH", 
-            url_image: "https://dynamic-assets.coinbase.com/666dcae79d8896d18a69b5354bfa95bd6d8eef206863281e2acd9a12f14b21726624450a5bc39287b9b380ec2dfa47f51ba6b3b01bd61a5630c53c0654f92c64/asset_icons/b68ce7819b9a02aeceb2454040f8b09dda0a9faf2df70755789d089de668051a.png"
+            url_image: "https://dynamic-assets.coinbase.com/666dcae79d8896d18a69b5354bfa95bd6d8eef206863281e2acd9a12f14b21726624450a5bc39287b9b380ec2dfa47f51ba6b3b01bd61a5630c53c0654f92c64/asset_icons/b68ce7819b9a02aeceb2454040f8b09dda0a9faf2df70755789d089de668051a.png",
+            mining_type: MiningType.all.sample
 
           }
           
@@ -79,7 +82,7 @@ namespace :dev do
   desc "Register the mining type"
   task add_mining_type: :environment do
 
-    show_spinner("Registering mining type...", "Task finished! | 5/5" ) do
+    show_spinner("Registering mining type...", "Task finished! | 4/5" ) do
 
       mining_types = [
 
